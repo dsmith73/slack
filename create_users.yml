@@ -1,13 +1,13 @@
 ---
-- name: Create OpsGenie Users
+- name: Create Slack Users
   hosts: localhost
   gather_facts: false
-  vars_files: ./users.yml
+  vars_files: ./noc.yml
   tasks:
     - name: Get List of all Users
       uri:
         method: GET
-        url: "https://api.opsgenie.com/v2/users"
+        url: "https://slack.com/api/users.profile.get"
         headers:
           Authorization: "GenieKey {{ api_key }}"
         return_content: yes
@@ -21,7 +21,7 @@
     - name: create users if they dont already exist
       uri:
         method: POST
-        url: https://api.opsgenie.com/v2/users
+        url: "https://slack.com/api/users.profile.set"
         headers:
           Content-Type: application/json
           Authorization: "GenieKey {{ api_key }}"

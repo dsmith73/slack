@@ -1,0 +1,16 @@
+---
+####    Send Message to Slack    ####
+- name: Test slack message
+  hosts: localhost
+  vars_files: ./key.yml
+
+  tasks:
+  - name: Send notification message via Slack
+    slack:
+      token: '{{ slack_token }}'
+      channel: "{{ slack_channel }}"
+      domain: "{{ slack_domain }}"
+      color: "good"
+      link_names: 1
+      parse: "full"
+      msg: 'This message was a test. It was only a test...'
